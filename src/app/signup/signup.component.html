@@ -1,0 +1,97 @@
+<form [formGroup]="userSignUp">
+    
+    <div class="form-group w-100">
+
+        <mat-form-field appearance="outline">
+            <mat-label>First Name</mat-label>
+            <input matInput placeholder="Placeholder" formControlName="first_name">
+        </mat-form-field>
+        <div class="error error-email"
+            *ngIf="(usignUpSubmit || userSignUp.controls['first_name'].touched) && userSignUp.controls['first_name'].errors != null">
+            <label class="text-danger"
+                *ngIf="(usignUpSubmit && userSignUp.controls['first_name'].hasError('required')) || userSignUp.controls['first_name'].touched && userSignUp.controls['first_name'].hasError('required')">
+                The first name is required field
+            </label>
+        </div>
+    </div>
+    <div class="form-group w-100">
+        <mat-form-field appearance="outline">
+            <mat-label>Last Name</mat-label>
+            <input matInput placeholder="Placeholder" formControlName="last_name">
+        </mat-form-field>
+        <div class="error error-email"
+            *ngIf="(usignUpSubmit || userSignUp.controls['last_name'].touched) && userSignUp.controls['last_name'].errors != null">
+            <label class="text-danger"
+                *ngIf="(usignUpSubmit && userSignUp.controls['last_name'].hasError('required')) || userSignUp.controls['last_name'].touched && userSignUp.controls['last_name'].hasError('required')">
+                The last name is required field
+            </label>
+        </div>
+    </div>
+    <div class="form-group w-100">
+        <mat-form-field appearance="outline">
+            <mat-label>Email address</mat-label>
+            <input matInput placeholder="Placeholder" formControlName="user_email">
+        </mat-form-field>
+        <div class="error error-email"
+            *ngIf="(usignUpSubmit || userSignUp.controls['user_email'].touched) && userSignUp.controls['user_email'].errors != null">
+            <label class="text-danger"
+                *ngIf="(usignUpSubmit && userSignUp.controls['user_email'].hasError('required')) || userSignUp.controls['user_email'].touched && userSignUp.controls['user_email'].hasError('required')">
+                Email is required field
+            </label>
+            <label class="text-danger"
+                *ngIf="(usignUpSubmit && userSignUp.controls['user_email'].hasError('pattern')) || userSignUp.controls['user_email'].hasError('pattern')">
+                Enter a valid email address!
+            </label>
+        </div>
+    </div>
+    <div class="form-group">
+        <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input matInput placeholder="Placeholder" type="password" formControlName="password">
+        </mat-form-field>
+        <div class="error error-email"
+            *ngIf="(usignUpSubmit || userSignUp.controls['password'].touched) && userSignUp.controls['password'].errors != null">
+            <label class="text-danger"
+                *ngIf="(usignUpSubmit && userSignUp.controls['password'].hasError('required')) || userSignUp.controls['password'].touched && userSignUp.controls['password'].hasError('required')">
+                Password is required field
+            </label>
+            <label class="text-danger"
+                *ngIf="(usignUpSubmit && userSignUp.controls['password'].hasError('pattern')) || userSignUp.controls['password'].hasError('minlength')">
+                Password must be at least 8 characters!
+            </label>
+        </div>
+    </div>
+
+    <div class="form-group w-100">
+        <mat-form-field appearance="outline">
+            <mat-label>DOB</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="dob">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <div class="error error-email"
+            *ngIf="(usignUpSubmit || userSignUp.controls['dob'].touched) && userSignUp.controls['dob'].errors != null">
+            <label class="text-danger"
+                *ngIf="(usignUpSubmit && userSignUp.controls['dob'].hasError('required')) || userSignUp.controls['dob'].touched && userSignUp.controls['dob'].hasError('required')">
+                The dob is required field
+            </label>
+        </div>
+    </div>
+    <div class="form-group w-100">
+        <mat-form-field appearance="outline">
+            <mat-label>User Role</mat-label>
+            <mat-select formControlName="role" required>
+              <mat-option value="admin">Admin</mat-option>
+              <mat-option value="user">User</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <div class="error error-email"
+            *ngIf="(usignUpSubmit || userSignUp.controls['role'].touched) && userSignUp.controls['role'].errors != null">
+            <label class="text-danger"
+                *ngIf="(usignUpSubmit && userSignUp.controls['role'].hasError('required')) || userSignUp.controls['role'].touched && userSignUp.controls['role'].hasError('required')">
+                User role is required field
+            </label>
+        </div>
+    </div>
+    <button mat-raised-button color="primary" (click)="signUpSubmit()">Sign Up</button>
+</form>

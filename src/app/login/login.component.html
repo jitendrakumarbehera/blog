@@ -1,0 +1,34 @@
+<form  [formGroup]="userLogin"  >
+
+    <div class="form-group">
+        <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="Placeholder" formControlName="user_name">
+        </mat-form-field>
+        <div class="error error-email" *ngIf="(uloginSubmit || userLogin.controls['user_name'].touched) && userLogin.controls['user_name'].errors != null">
+            <label class="text-danger" *ngIf="(uloginSubmit && userLogin.controls['user_name'].hasError('required')) || userLogin.controls['user_name'].touched && userLogin.controls['user_name'].hasError('required')">
+                Email is Required!
+            </label>
+            <label class="text-danger" *ngIf="(uloginSubmit && userLogin.controls['user_name'].hasError('pattern')) || userLogin.controls['user_name'].hasError('pattern')">
+                Enter a valid email address!
+            </label>
+        </div>
+    </div>
+    <div class="form-group">
+        <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input matInput placeholder="Placeholder" formControlName="password" type="password">
+        </mat-form-field>
+        <div class="error error-email" *ngIf="(uloginSubmit || userLogin.controls['password'].touched) && userLogin.controls['password'].errors != null">
+            <label class="text-danger" *ngIf="(uloginSubmit && userLogin.controls['password'].hasError('required')) || userLogin.controls['password'].touched && userLogin.controls['password'].hasError('required')">
+                Password is Required!
+            </label>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <button class="btn btn-primary form-submit" type="submit" (click)="login()">
+            Login 
+        </button>
+    </div>
+</form>

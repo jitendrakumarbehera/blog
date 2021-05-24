@@ -1,0 +1,76 @@
+<form [formGroup]="userBlog">
+    
+    <div class="form-group w-100">
+
+        <mat-form-field appearance="outline">
+            <mat-label>Title</mat-label>
+            <input matInput placeholder="Placeholder" formControlName="Title">
+        </mat-form-field>
+        <div class="error error-email"
+            *ngIf="(blogSubmit || userBlog.controls['Title'].touched) && userBlog.controls['Title'].errors != null">
+            <label class="text-danger"
+                *ngIf="(blogSubmit && userBlog.controls['Title'].hasError('required')) || userBlog.controls['Title'].touched && userBlog.controls['Title'].hasError('required')">
+                The Title  is required field
+            </label>
+        </div>
+    </div>
+    <div class="form-group w-100">
+
+        <mat-form-field appearance="outline">
+            <mat-label>Description</mat-label>
+            <textarea matInput placeholder="Description" formControlName="Description"></textarea>
+        </mat-form-field>
+       
+        <div class="error error-email"
+            *ngIf="(blogSubmit || userBlog.controls['Description'].touched) && userBlog.controls['Description'].errors != null">
+            <label class="text-danger"
+                *ngIf="(blogSubmit && userBlog.controls['Description'].hasError('required')) || userBlog.controls['Description'].touched && userBlog.controls['Description'].hasError('required')">
+                The Description  is required field
+            </label>
+        </div>
+    </div>
+    <div class="form-group w-100">
+        <mat-form-field appearance="outline">
+            <mat-label>Status</mat-label>
+            <mat-select formControlName="Status" required>
+              <mat-option value="active">Active</mat-option>
+              <mat-option value="deactive">Deactive</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <div class="error error-email"
+            *ngIf="(blogSubmit || userBlog.controls['Status'].touched) && userBlog.controls['Status'].errors != null">
+            <label class="text-danger"
+                *ngIf="(blogSubmit && userBlog.controls['Status'].hasError('required')) || userBlog.controls['Status'].touched && userBlog.controls['Status'].hasError('required')">
+                Status is required field
+            </label>
+        </div>
+    </div>
+   
+    <button mat-raised-button color="primary" (click)="createBlog()" *ngIf="blogedit == 0">Create Blog</button>
+    <button mat-raised-button color="primary" (click)="updateBlog(blogId)" *ngIf="blogedit == 1">Update Blog</button>
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>User</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of blogData">
+                <td>{{item.Title}}</td>
+                <td>{{item.Description}}</td>
+                <td>{{item.Date}}</td>
+                <td>{{item.Status}}</td>
+                <td>{{item.user_id}}</td>
+                <td>
+                    <button mat-raised-button color="primary" (click)="editBlog(item.id)">Edit</button> |
+                    <button mat-raised-button color="primary" (click)="deleteBlog(item.id)">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</form>
